@@ -1,17 +1,18 @@
 using API.Data;
 using API.Entities;
 using API.Extensions;
-using API.Interfaces;
-using API.Repository;
-using API.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+//builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -51,5 +52,13 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+
+//app.UseStaticFiles(new StaticFileOptions
+//{
+//    FileProvider = new PhysicalFileProvider(Path.Combine(environment.ContentRootPath, "wwwroot/images")),
+//    // RequestPath = "/wwwroot/images"
+//    RequestPath = "/Images"
+//    //https://localhost:7205/Images/3a6ab638-2151-4fa0-abf6-28a96aa2a37b.jpg
+//});
 
 app.Run();

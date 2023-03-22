@@ -1,6 +1,7 @@
 ﻿using API.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace API.Data
 {
@@ -10,9 +11,14 @@ namespace API.Data
         {
         }
 
+        public DbSet<Category> Categories { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
             builder.Entity<Role>()
              .HasData(
                  new Role { Id = 1, Name = "Member", NormalizedName = "MEMBER" },
