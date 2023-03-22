@@ -1,4 +1,5 @@
-﻿using API.Interfaces;
+﻿using API.Entities;
+using API.Interfaces;
 using API.Repository;
 using API.Services;
 
@@ -10,6 +11,7 @@ namespace API.Extensions
         {
             services.AddScoped<TokenService>();
             services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<IGenericRepository<Category>,CategoryRepository>();
 
             return services;
         }

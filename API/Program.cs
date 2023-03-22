@@ -3,8 +3,6 @@ using API.Entities;
 using API.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileProviders;
-using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
