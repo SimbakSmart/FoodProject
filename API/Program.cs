@@ -1,5 +1,9 @@
 using API.Data;
 using API.Entities;
+using API.Extensions;
+using API.Interfaces;
+using API.Repository;
+using API.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,22 +20,11 @@ builder.Services.AddDbContext<DbFoodContext>(
    opt => { opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")); }
 );
 
-builder.Services.AddIdentityCore<User>(
-    opt =>
-    {
-        opt.User.RequireUniqueEmail = true;
-        opt.Password.RequireLowercase = false;
-        opt.Password.RequireUppercase = false;
-        opt.Password.RequireDigit = false;
-        opt.Password.RequireNonAlphanumeric = false;
-    }
-)
-.AddRoles<Role>()
-.AddEntityFrameworkStores<DbFoodContext>();
-
+builder.Services.AddIdentityServices(builder.Configuration);
 builder.Services.AddCors();
-builder.Services.AddAuthentication();
+//builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
+builder.Services.AddApplicationServices();
 
 var app = builder.Build();
 
